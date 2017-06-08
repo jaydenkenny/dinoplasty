@@ -7,6 +7,7 @@ const app = {
         .querySelector(selectors.formSelector)
         .addEventListener('submit',this.addDino.bind(this))
 
+
         // old method of focusing: document
         // .querySelector(selectors.formSelector)
         // .dinoName
@@ -27,14 +28,16 @@ const app = {
             <button class="bttnDown button secondary">${document.textContent ="👇"}</button>
         `
     
-        this.list.appendChild(listItem)
+        //this.list.append(listItem)
+        this.list.insertBefore(listItem,this.list.firstChild)
+        this.dinos.unshift(dino) //accesses the array and also changes that
 
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.editDino.bind(this))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
 //add the dino to this.dinos
-        this.dinos.push(`${dino.id}. ${dino.name}`)
+        this.dinos.push(dino)
         console.log(this.dinos)
 
         ++ this.max
