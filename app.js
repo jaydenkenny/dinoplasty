@@ -6,6 +6,11 @@ const app = {
         document
         .querySelector(selectors.formSelector)
         .addEventListener('submit',this.addDino.bind(this))
+
+        // old method of focusing: document
+        // .querySelector(selectors.formSelector)
+        // .dinoName
+        // .focus()
     },
     addDino(ev){
         ev.preventDefault()
@@ -33,6 +38,7 @@ const app = {
         console.log(this.dinos)
 
         ++ this.max
+        ev.target.reset() //resets all inputs
         //this.renderListItem(dino)
     },
 
