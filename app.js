@@ -73,6 +73,7 @@ const app = {
     renderListItem(dino){
         const item = document.createElement('li')
         //item.textContent = dino.name
+        item.dataset.id = dino.id
 
         return item
     },
