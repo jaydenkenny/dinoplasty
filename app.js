@@ -47,6 +47,7 @@ const app = {
     
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this))
+        listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
 //add the dino to this.dinos
@@ -96,9 +97,15 @@ const app = {
 
     favDino(ev){
         ev.preventDefault()
+        const fav = ev.target.closest('.dino')
+        const color = fav.style= 'background-color:red;border-style:solid;'
+        //const fav = fav.classList.remove(color)
+    },
+    editDino(ev){
         const edit = ev.target.closest('.dino')
-        const color = edit.style= 'background-color:red;border-style:solid;'
-        const fav = edit.classList.remove(color)
+        edit.contentEditable ="true"
+        edit.style='background-color:yellow;border:dashed;'
+        edit.blur()
     },
 
     upDino(ev){

@@ -15,4 +15,4 @@ This is another paragraph
 ## Add another field to the form, and make sure that data also persists across page loads
 ##Make it look nice
 
-##Edit the ames of dinsaurs that already in the list (and make sure the changes persist across page loads)
+##Edit the names of dinsaurs that already in the list (and make sure the changes persist across page loads)
