@@ -1,3 +1,17 @@
+.template{
+    visibility:hidden;
+}
+
+.actions{
+    float: right;
+}
+.dino{
+    clear:both;
+}
+.eats{
+    display:inline-block;
+}
+
 ul li {
     list-style:none;
     cursor:pointer;

@@ -17,6 +17,7 @@
                 <form id="dinoForm">
                         <div class="input-group">
                         <input type="text" name="dinoName" placeholder="Name a dinosaur" class="input-group-field" autofocus required>
+                        <input type="text" name="dinoEats" placeholder="What does your dino eat?" class="input-group-field" required>
                         <div class="input-group-button">
                         <button type="submit" class="button success">Add Dino</button>
                         </div>
@@ -26,7 +27,19 @@
         </div>
         <div class="row">
             <div class=".medium-8 medium-offset-2 column">
-                <ul id="dinoList"></ul>
+                <ul id="dinoList">
+                    <li class="dino template">
+                        <span class="dinoName"></span>
+                        <div class="eats"><span class="dinoEats"></span></div>
+                        <span class="actions button-group">
+                            <button class="del button alert">🗑️</button>
+                            <button class="bttnFav button success">🌟</button>
+                            <button class="bttnDown button secondary">✏️</button>
+                            <button class="bttnUp button secondary">☝️</button>
+                            <button class="bttnDown button secondary">👇</button>
+                        </span>
+                    </li>
+                </ul>
             </div>
         </div>
         

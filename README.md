@@ -9,8 +9,10 @@ This is another paragraph
 *Thing 2
 *Nonsense
 
-## Add promote/fave button
+## Day 4 HW
+## Fix issue with dino.id values which sometimes results in removing the wrong dinosaur from the array and thus from localStorage
 
-## Add buttons to move a dinosaur up and down the list
+## Add another field to the form, and make sure that data also persists across page loads
+##Make it look nice
 
-## Persist the dinosaur data using `window.localStorage...the dinosaurs should stay in the list even when the page is refreshed
+##Edit the ames of dinsaurs that already in the list (and make sure the changes persist across page loads)
