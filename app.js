@@ -98,13 +98,24 @@ const app = {
     favDino(ev){
         ev.preventDefault()
         const fav = ev.target.closest('.dino')
-        const color = fav.style= 'background-color:red;border-style:solid;'
-        //const fav = fav.classList.remove(color)
+        
+        if(fav){
+            if(fav.classList.contains('color')){
+                fav.classList.remove('color')
+            }
+            else{
+                fav.classList.add('color')
+            }
+        }
     },
+    
     editDino(ev){
-        const edit = ev.target.closest('.dino')
+        const edit = ev.target.closest('.dino.name')
         edit.contentEditable ="true"
-        edit.style='background-color:yellow;border:dashed;'
+        edit.style='background-color:yellow;border:dashed;border-color:black;'
+        
+        dino.name = dino.name.innerHTML
+        //this.dinos.update()
         edit.blur()
     },
 

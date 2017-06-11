@@ -10,10 +10,17 @@
 }
 .eats{
     display:inline-block;
+    margin-left:20%;
+}
+.color {
+    border-style:solid;
+    border-color:black;
+    background-color:red !important;
 }
 
 ul li {
     list-style:none;
+    color:white;
     cursor:pointer;
     position:relative;
     padding:12px 8px 12px 40px;
@@ -33,4 +40,6 @@ ul li:nth-child(odd){
 
 ul li:hover{
     background-color:grey;
+    border:solid;
+    border-color: yellow;
 }
