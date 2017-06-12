@@ -48,7 +48,7 @@ class App {
 
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this,dino))
-        listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
+        listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this,dino))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this,dino))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this,dino))
         listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
@@ -132,12 +132,11 @@ class App {
         // }
     }
     
-    editDino(ev){
+    editDino(dino,ev){
         //console.log('editDino')
         //ev.preventDefault()
         const edit = ev.target.closest('.dino')
         //console.log(edit)
-        const btn = edit.querySelector('.edits.button')
         if(edit){
             const name = edit.querySelector('.dinoName')
             if(edit.classList.contains('edits')){
@@ -145,6 +144,7 @@ class App {
                 name.contentEditable="false"
             }
             else{
+                const btn = edit.querySelector('.button.bttnEdit')
                 edit.classList.add('edits')
                 name.contentEditable ="true"
                 name.focus()
