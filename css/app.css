@@ -29,6 +29,11 @@ body{
 .dinoName{
     flex-grow:1;
 }
+.dino:first-child .bttnUp,
+.dino:last-child .bttnDown{
+    background-color:#ddd;
+    cursor:not-allowed;
+}
 .eats{
     display:inline-block;
     align-items:center;
@@ -47,6 +52,7 @@ body{
 
 .actions.button-group{
     margin-bottom:0;
+    color:#eee;
 }
 
 ul li {

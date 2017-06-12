@@ -48,8 +48,8 @@ const app = {
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this,dino))
         listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
-        listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this))
-        listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
+        listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this,dino))
+        listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this,dino))
         listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
         //listItem.querySelector('.dinoName').addEventListener('keypress',this.updateDino.bind(this))
 //add the dino to this.dinos
@@ -162,18 +162,41 @@ const app = {
     },
 //accessing only the name of the object
 
-    upDino(ev){
+    upDino(dino,ev){
         ev.preventDefault()
-        const up = ev.target
-        const listItem = up.closest('li')
-        this.list.insertBefore(listItem,listItem.previousSibling)
+        const listItem = ev.target.closest('.dino')
+
+        const index = this.dinos.findIndex((currentDino, i) => {
+        return currentDino.id === dino.id
+        })
+
+        if (index > 0) {
+        this.list.insertBefore(listItem, listItem.previousElementSibling)
+
+        const previousDino = this.dinos[index - 1]
+        this.dinos[index - 1] = dino
+        this.dinos[index] = previousDino
+        this.save()
+            }
     },
 
-    downDino(ev){
+    downDino(dino,ev){
         ev.preventDefault()
         const down = ev.target
         const listItem = down.closest('li')
-        this.list.insertBefore(listItem.nextSibling,listItem)    
+        const index = this.dinos.findIndex((currentDino, i) =>{
+            return currentDino.id === dino.id
+        })
+
+        if(index < this.dinos.length -1){
+            this.list.insertBefore(listItem.nextSibling,listItem)
+
+            const nextDino = this.dinos[index + 1]
+            this.dinos[index+1]=dino
+            this.dinos[index] = nextDino
+
+            this.save()
+        }    
     },
 
     renderListItem(dino){
