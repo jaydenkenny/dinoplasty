@@ -1,3 +1,7 @@
+body{
+    background-image:url('https://www.pixelstalk.net/wp-content/uploads/2016/06/Cute-Dinosaur-Wallpaper.jpg') !important;
+    color:white !important;
+}
 .template{
     visibility:hidden;
 }
@@ -12,10 +16,15 @@
     display:inline-block;
     margin-left:20%;
 }
+.edits{
+    background-color:lightpink;
+    border:dashed;
+    border-color:white;
+}
 .color {
     border-style:solid;
-    border-color:black;
-    background-color:red !important;
+    border-color:white;
+    background-color:lightgreen !important;
 }
 
 ul li {
@@ -25,7 +34,7 @@ ul li {
     position:relative;
     padding:12px 8px 12px 40px;
     margin-right:40%;
-    background-color: darkgreen;
+    background-color: darkcyan;
     font-size:18px;
     transition:0.2s;
     -webkit-user-select: none;
@@ -35,11 +44,11 @@ ul li {
 }
 
 ul li:nth-child(odd){
-    background-color:green;
+    background-color:lightskyblue;
 }
 
 ul li:hover{
-    background-color:grey;
+    background-color:lightgrey;
     border:solid;
-    border-color: yellow;
+    border-color: lightyellow;
 }

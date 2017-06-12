@@ -52,15 +52,19 @@ const app = {
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
 //add the dino to this.dinos
         //this.dinos.push(dino)
-        console.log(dino)
-        if(dino.name in this.dinos){
-            this.max
-        }else{
-            ++ this.max
-        }
+        //console.log(dino)
+        ++ this.max
     },
 
     save(){
+        console.log(this.list.children)
+        const stuff = this.list.children         
+         for(let i=0;i<stuff.length-1;i++){
+                console.log(i)
+                const listItem = stuff[i]
+                this.dinos[i].id = i
+                listItem.dataset.id = this.dinos[i].id
+            }
             localStorage.setItem('dinos',JSON.stringify(this.dinos))
         },
 
@@ -110,9 +114,18 @@ const app = {
     },
     
     editDino(ev){
-        const edit = ev.target.closest('.dino.name')
-        edit.contentEditable ="true"
-        edit.style='background-color:yellow;border:dashed;border-color:black;'
+        ev.preventDefault()
+        const edit = ev.target.closest('.dino')
+
+        if(edit){
+            if(edit.classList.contains('edits')){
+                edit.classList.remove('edits')
+            }
+            else{
+                edit.classList.add('edits')
+                edit.contentEditable ="true"
+            }
+        }
         
         dino.name = dino.name.innerHTML
         //this.dinos.update()
