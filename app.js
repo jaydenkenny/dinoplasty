@@ -127,9 +127,9 @@ const app = {
             }
         }
         
-        dino.name = dino.name.innerHTML
+        //dino.name = dino.name.innerHTML
         //this.dinos.update()
-        edit.blur()
+        //edit.blur()
     },
 
     upDino(ev){

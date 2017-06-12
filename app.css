@@ -1,6 +1,11 @@
 body{
     background-image:url('https://www.pixelstalk.net/wp-content/uploads/2016/06/Cute-Dinosaur-Wallpaper.jpg') !important;
-    color:white !important;
+    color:darkblue !important;
+}
+.slogan{
+    color:lightyellow;
+    text-shadow:-1px 0 grey,0 1px grey,1px 0 grey,0 -1px grey;
+    align-content: center !important;   
 }
 .template{
     visibility:hidden;
