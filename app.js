@@ -1,5 +1,5 @@
-const app = {
-    init(selectors){
+class App {
+    constructor(selectors){
         this.dinos = []
         this.max = 0
         this.list = document.querySelector(selectors.listSelector)
@@ -15,7 +15,7 @@ const app = {
         // .dinoName
         // .focus()
         this.load()
-    },
+    }
 
     load(){
         //load JSON from localStorage
@@ -27,7 +27,7 @@ const app = {
             dinoArray.reverse()
             dinoArray.map(this.addDino.bind(this))
         }
-    },
+    }
 
 
     addDino(dino){
@@ -44,19 +44,22 @@ const app = {
         this.dinos.unshift(dino) //accesses the array and also changes that
         this.save()
 
-    
+        listItem.querySelector('.dinoName').addEventListener('keypress',this.saveOnEnter.bind(this,dino))
+
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this,dino))
         listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this,dino))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this,dino))
         listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
-        //listItem.querySelector('.dinoName').addEventListener('keypress',this.updateDino.bind(this))
+
 //add the dino to this.dinos
         //this.dinos.push(dino)
         //console.log(dino)
-        ++ this.max
-    },
+        if (dino.id > this.max){
+            this.max = dino.id
+        }
+    }
 
     save(){
         console.log(this.list.children)
@@ -68,7 +71,13 @@ const app = {
                 listItem.dataset.id = this.dinos[i].id
             }
             localStorage.setItem('dinos',JSON.stringify(this.dinos))
-        },
+        }
+
+    saveOnEnter(dino,ev){
+        if(ev.key === 'Enter'){
+            this.editDino(dino,ev)
+        }
+    }
 
     addDinoFromForm(ev){
         const dino = {
@@ -83,7 +92,7 @@ const app = {
         ev.target.reset() //resets all inputs
         //this.renderListItem(dino)
 
-    },
+    }
 
     delDino(ev){
         ev.preventDefault()
@@ -99,7 +108,7 @@ const app = {
             }
         }
         this.save()
-    },
+    }
 
 
     favDino(dino,ev){
@@ -121,13 +130,14 @@ const app = {
         //         fav.classList.add('color')
         //     }
         // }
-    },
+    }
     
     editDino(ev){
         //console.log('editDino')
-        ev.preventDefault()
+        //ev.preventDefault()
         const edit = ev.target.closest('.dino')
         //console.log(edit)
+        const btn = edit.querySelector('.edits.button')
         if(edit){
             const name = edit.querySelector('.dinoName')
             if(edit.classList.contains('edits')){
@@ -138,9 +148,10 @@ const app = {
                 edit.classList.add('edits')
                 name.contentEditable ="true"
                 name.focus()
+                this.save()
             }
         }
-    },
+    }
 
     updateDino(ev){
         const dinoNameSpan = ev.target
@@ -159,7 +170,7 @@ const app = {
                 }
             }
         //}
-    },
+    }
 //accessing only the name of the object
 
     upDino(dino,ev){
@@ -178,7 +189,7 @@ const app = {
         this.dinos[index] = previousDino
         this.save()
             }
-    },
+    }
 
     downDino(dino,ev){
         ev.preventDefault()
@@ -197,7 +208,7 @@ const app = {
 
             this.save()
         }    
-    },
+    }
 
     renderListItem(dino){
         const item = this.template.cloneNode(true)
@@ -212,11 +223,20 @@ const app = {
         //item.textContent = dino.name
 
         return item
-    },
+    }
 
 }
-app.init({
+
+const app = new App({
     formSelector:'#dinoForm',
     listSelector:'#dinoList',
     templateSelector:'.dino.template',
 })
+// app.init({
+//     formSelector:'#dinoForm',
+//     listSelector:'#dinoList',
+//     templateSelector:'.dino.template',
+// })
+
+//enter key not working
+//setAttribute

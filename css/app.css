@@ -28,6 +28,10 @@ body{
 }
 .dinoName{
     flex-grow:1;
+    margin-right:1rem;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 .dino:first-child .bttnUp,
 .dino:last-child .bttnDown{
@@ -53,6 +57,10 @@ body{
 .actions.button-group{
     margin-bottom:0;
     color:#eee;
+    white-space: nowrap;
+}
+.actions .button{
+    padding: 0.65em 0.8em;
 }
 
 ul li {
