@@ -50,6 +50,7 @@ const app = {
         listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
+        listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
 //add the dino to this.dinos
         //this.dinos.push(dino)
         //console.log(dino)
@@ -114,23 +115,40 @@ const app = {
     },
     
     editDino(ev){
+        //console.log('editDino')
         ev.preventDefault()
         const edit = ev.target.closest('.dino')
-
+        //console.log(edit)
         if(edit){
+            const name = edit.querySelector('.dinoName')
             if(edit.classList.contains('edits')){
                 edit.classList.remove('edits')
+                name.contentEditable="false"
             }
             else{
                 edit.classList.add('edits')
-                edit.contentEditable ="true"
+                name.contentEditable ="true"
+                name.focus()
             }
         }
-        
-        //dino.name = dino.name.innerHTML
-        //this.dinos.update()
-        //edit.blur()
     },
+
+    updateDino(ev){
+        const dinoNameSpan = ev.target
+        const newName = dinoNameSpan.textContent
+        const listItem = dinoNameSpan.closest('.dino')
+        const dinoId = listItem.dataset.id
+
+        console.log({ dinoNameSpan, newName, listItem, dinoId })
+        
+        for(let i=0;i<this.dinos.length;i++){
+            if(parseInt(dinoId) === this.dinos[i].id){
+                this.dinos[i].name = newName
+                this.save()
+            }
+        }
+    },
+//accessing only the name of the object
 
     upDino(ev){
         ev.preventDefault()

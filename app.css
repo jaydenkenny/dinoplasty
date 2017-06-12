@@ -8,7 +8,7 @@ body{
     align-content: center !important;   
 }
 .template{
-    visibility:hidden;
+    display:none;
 }
 
 .actions{
@@ -22,7 +22,7 @@ body{
     margin-left:20%;
 }
 .edits{
-    background-color:lightpink;
+    background-color:lightpink !important;
     border:dashed;
     border-color:white;
 }
