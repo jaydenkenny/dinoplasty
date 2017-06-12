@@ -9,10 +9,7 @@ This is another paragraph
 *Thing 2
 *Nonsense
 
-## Day 4 HW
-## Fix issue with dino.id values which sometimes results in removing the wrong dinosaur from the array and thus from localStorage
+## What would this be without homework???
+*Categorize stuff! separate dino by diet, or era, or whatever! Make a whole ne thing with categories, like messages separated into channels! Use your tremendous creativity! Exclamation point!
 
-## Add another field to the form, and make sure that data also persists across page loads
-##Make it look nice
-
-##Edit the names of dinsaurs that already in the list (and make sure the changes persist across page loads)
+or heck, just separate lists based on the second input field you added in the weekend homework!
