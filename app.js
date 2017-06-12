@@ -46,11 +46,12 @@ const app = {
 
     
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
-        listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this))
+        listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this,dino))
         listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this))
         listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
+        //listItem.querySelector('.dinoName').addEventListener('keypress',this.updateDino.bind(this))
 //add the dino to this.dinos
         //this.dinos.push(dino)
         //console.log(dino)
@@ -73,7 +74,8 @@ const app = {
         const dino = {
             id: this.max + 1,
             name: ev.target.dinoName.value,
-            eats: ev.target.dinoEats.value
+            eats: ev.target.dinoEats.value,
+            fav: false,
         }
         ev.preventDefault()
         this.addDino(dino)
@@ -100,18 +102,25 @@ const app = {
     },
 
 
-    favDino(ev){
-        ev.preventDefault()
+    favDino(dino,ev){
         const fav = ev.target.closest('.dino')
-        
-        if(fav){
-            if(fav.classList.contains('color')){
-                fav.classList.remove('color')
-            }
-            else{
-                fav.classList.add('color')
-            }
+        dino.fav = !dino.fav
+
+        if(dino.fav){
+            fav.classList.add('color')
+        }else{
+            fav.classList.remove('color')
         }
+        this.save()
+        
+        // if(fav){
+        //     if(fav.classList.contains('color')){
+        //         fav.classList.remove('color')
+        //     }
+        //     else{
+        //         fav.classList.add('color')
+        //     }
+        // }
     },
     
     editDino(ev){
@@ -139,14 +148,17 @@ const app = {
         const listItem = dinoNameSpan.closest('.dino')
         const dinoId = listItem.dataset.id
 
-        console.log({ dinoNameSpan, newName, listItem, dinoId })
-        
+        //console.log({ dinoNameSpan, newName, listItem, dinoId })
+        //let key = ev.which || ev.keyCode
+        //if(key == 13){
+            
         for(let i=0;i<this.dinos.length;i++){
             if(parseInt(dinoId) === this.dinos[i].id){
                 this.dinos[i].name = newName
                 this.save()
+                }
             }
-        }
+        //}
     },
 //accessing only the name of the object
 
@@ -154,14 +166,14 @@ const app = {
         ev.preventDefault()
         const up = ev.target
         const listItem = up.closest('li')
-        this.list.insertBefore(listItem,listItem.previousElementSibling)
+        this.list.insertBefore(listItem,listItem.previousSibling)
     },
 
     downDino(ev){
         ev.preventDefault()
         const down = ev.target
         const listItem = down.closest('li')
-        this.list.insertBefore(listItem.nextElementSibling,listItem)    
+        this.list.insertBefore(listItem.nextSibling,listItem)    
     },
 
     renderListItem(dino){
@@ -170,6 +182,10 @@ const app = {
         item.dataset.id = dino.id
         item.querySelector('.dinoName').textContent = dino.name
         item.querySelector('.dinoEats').textContent = dino.eats
+        if(dino.fav){
+            item.classList.add('color')
+        }
+        
         //item.textContent = dino.name
 
         return item

@@ -7,6 +7,9 @@ body{
     text-shadow:-1px 0 grey,0 1px grey,1px 0 grey,0 -1px grey;
     align-content: center !important;   
 }
+.dino.template{
+    display:none;
+}
 .template{
     display:none;
 }
@@ -16,10 +19,19 @@ body{
 }
 .dino{
     clear:both;
+    display:flex;
+    padding: 0.75rem 1.05rem;
+    border:1px solid #ddd;
+}
+.dino + .dino{
+    border-top:none;
+}
+.dinoName{
+    flex-grow:1;
 }
 .eats{
     display:inline-block;
-    margin-left:20%;
+    align-items:center;
 }
 .edits{
     background-color:lightpink !important;
@@ -30,6 +42,11 @@ body{
     border-style:solid;
     border-color:white;
     background-color:lightgreen !important;
+    transition:1s;
+}
+
+.actions.button-group{
+    margin-bottom:0;
 }
 
 ul li {
