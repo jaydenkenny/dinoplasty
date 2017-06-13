@@ -31,9 +31,7 @@ class App {
             dinoArray.map(this.addDino.bind(this))
 
         const faveJSON = localStorage.getItem('faves')
-        //revert JSON back into an array
         const faveArray = JSON.parse(faveJSON)
-        //set this.dinos with the dinos from that array
         if(faveArray){
             faveArray.reverse()
             faveArray.map(this.addDino.bind(this))
@@ -106,7 +104,7 @@ class App {
     searchDino(ev){
         const input = document.getElementById('myInput')
         const filter = input.value.toUpperCase()
-        const ul=document.getElementTagName('.faveList')
+        const ul=document.getElementsByClassName('.faveList')
         const li = ul.getElementByTagName('li')
 
         for(let i=0;i<li.length;i++){
