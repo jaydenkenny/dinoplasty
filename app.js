@@ -8,7 +8,7 @@ class App {
         .querySelector(selectors.formSelector)
         .addEventListener('submit',this.addDinoFromForm.bind(this))
 
-        document.querySelector('.searchDino').addEventListener('keypress',this.searchOnEnter.bind(this))
+        document.querySelector('.searchDino').addEventListener('keyup',this.searchOnEnter.bind(this))
 
         this.template = document.querySelector(selectors.templateSelector)
 
@@ -101,22 +101,22 @@ class App {
 
     }
 
-    searchDino(ev){
-        const input = document.getElementById('myInput')
-        const filter = input.value.toUpperCase()
-        const ul=document.getElementsByClassName('.faveList')
-        const li = ul.getElementByTagName('li')
+ searchDino(ev) {
+    const q = ev.currentTarget.value
+    const prevMatches = Array.from(document.querySelectorAll('.dino-name strong'))
+    this.removeElements(prevMatches)
 
-        for(let i=0;i<li.length;i++){
-            a=li[i].getElementByTagName('a')[0]
-            if(a.innerHTML.toUpperCase().indexOf(filter)>-1){
-                li[i].style.display ="";
-            }else{
-                li[i].style.dispaly='none'
-            }
-        }
-
-    }
+    Array.from(document.querySelectorAll('.dino')).map(listItem => {
+      const nameField = listItem.querySelector('.dino-name')
+      const pattern = new RegExp(q, 'gi')
+      if (nameField.textContent.match(pattern)) {
+        listItem.classList.remove('hide')
+        nameField.innerHTML = nameField.innerHTML.replace(pattern, '<strong>$&</strong>')
+      } else {
+        listItem.classList.add('hide')
+      }
+    })
+  }
 
     searchOnEnter(ev){
         if(ev.key === 'Enter'){
@@ -127,8 +127,7 @@ class App {
     delDino(ev){
         ev.preventDefault()
         const delItem = ev.target.closest('.dino')
-        //console.log(del.parentNode.parentNode)
-        //this.list.removeChild(del.parentNode)
+        
         delItem.remove()
         for(let i=0;i<this.dinos.length;i++){
             const currentId = this.dinos[i].id.toString()
