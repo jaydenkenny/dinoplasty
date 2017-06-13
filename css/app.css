@@ -39,8 +39,8 @@ body{
     cursor:not-allowed;
 }
 .eats{
-    display:inline-block;
-    align-items:center;
+    /*display:inline-block;
+    align-items:center;*/
     margin-right:1rem;
 }
 .edits{

@@ -14,15 +14,26 @@
     <body>
         <div class="row">
             <div class="medium-8 medium-offset-2 column">
+                 <input type="text" name="searchDino" placeholder="Looking for Something?" id="myInput" class="searchDino">
                 <h1>Dinoplasty</h1>
                 <i class="slogan">"We know our 'saurs"</i>
             
                 <form id="dinoForm">
-                        <div class="input-group">
+                        <div class="row">
+                        <div class="small-6 column">
                         <input type="text" name="dinoName" placeholder="Name a dinosaur" class="input-group-field" autofocus required>
-                        <input type="text" name="dinoEats" placeholder="What does your dino eat?" class="input-group-field" required>
-                        <div class="input-group-button">
-                        <button type="submit" class="button success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="small-4 column">
+
+                            <select name="dinoEats">
+                                <option value="">Hungry?</option>
+                                <option value="hooman">Hooman</option>
+                                <option value="cookies">Cookies</option>
+                                <option value="smol children">Smol Children</option>
+                            </select>
+                        </div>
+                        <div class="small-2 column">
+                        <button type="submit" class="button success expanded"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                     </form>
                 </div>
@@ -34,7 +45,7 @@
                 </ul>
             </div>
         </div>
-         <li class="dino template">
+                    <li class="dino template">
                         <span class="dinoName" contenteditable="false"></span>
                         <div class="eats"><span class="dinoEats"></span></div>
                         <span class="actions button-group">
@@ -45,6 +56,10 @@
                             <button class="bttnDown button secondary">👇</button>
                         </span>
                     </li>
+        
+        <ul class="faveList">
+            
+        </ul>
         
         <script src="app.js"></script>
     </body>

@@ -10,6 +10,6 @@ This is another paragraph
 *Nonsense
 
 ## What would this be without homework???
-*Categorize stuff! separate dino by diet, or era, or whatever! Make a whole ne thing with categories, like messages separated into channels! Use your tremendous creativity! Exclamation point!
+*Categorize stuff! seperate dino by diet, or era, or whatever! Make a whole ne thing with categories, like messages separated into channels! Use your tremendous creativity! Exclamation point!
 
 or heck, just separate lists based on the second input field you added in the weekend homework!

@@ -2,10 +2,13 @@ class App {
     constructor(selectors){
         this.dinos = []
         this.max = 0
+        this.faves = []
         this.list = document.querySelector(selectors.listSelector)
         document
         .querySelector(selectors.formSelector)
         .addEventListener('submit',this.addDinoFromForm.bind(this))
+
+        document.querySelector('.searchDino').addEventListener('keypress',this.searchOnEnter.bind(this))
 
         this.template = document.querySelector(selectors.templateSelector)
 
@@ -26,7 +29,16 @@ class App {
         if(dinoArray){
             dinoArray.reverse()
             dinoArray.map(this.addDino.bind(this))
+
+        const faveJSON = localStorage.getItem('faves')
+        //revert JSON back into an array
+        const faveArray = JSON.parse(faveJSON)
+        //set this.dinos with the dinos from that array
+        if(faveArray){
+            faveArray.reverse()
+            faveArray.map(this.addDino.bind(this))
         }
+    }
     }
 
 
@@ -45,12 +57,14 @@ class App {
         this.save()
 
         listItem.querySelector('.dinoName').addEventListener('keypress',this.saveOnEnter.bind(this,dino))
+        listItem.querySelector('.dinoEats').addEventListener('submit',this.searchDino.bind(this,dino))
 
         listItem.querySelector('.del').addEventListener('click',this.delDino.bind(this))
         listItem.querySelector('.bttnFav').addEventListener('click',this.favDino.bind(this,dino))
         listItem.querySelector('.bttnEdit').addEventListener('click',this.editDino.bind(this,dino))
         listItem.querySelector('.bttnUp').addEventListener('click',this.upDino.bind(this,dino))
         listItem.querySelector('.bttnDown').addEventListener('click',this.downDino.bind(this,dino))
+        //listItem.querySelector('.faves').addEventListener('click',this.faves.bind(this,dino))
         // listItem.querySelector('.dinoName').addEventListener('blur',this.updateDino.bind(this))
 
 //add the dino to this.dinos
@@ -62,15 +76,8 @@ class App {
     }
 
     save(){
-        //console.log(this.list.children)
-        // const stuff = this.list.children         
-        //  for(let i=0;i<stuff.length-1;i++){
-        //         //console.log(i)
-        //         const listItem = stuff[i]
-        //         this.dinos[i].id = i
-        //         listItem.dataset.id = this.dinos[i].id
-        //     }
             localStorage.setItem('dinos',JSON.stringify(this.dinos))
+            localStorage.setItem('faves',JSON.stringify(this.faves))
         }
 
     saveOnEnter(dino,ev){
@@ -90,11 +97,33 @@ class App {
         
         ev.preventDefault()
         this.addDino(dino)
-        //removed stuff
-        ev.target.reset() //resets all inputs
+        //removed stuff        ev.target.reset() //resets all inputs
         //this.renderListItem(dino)
         
 
+    }
+
+    searchDino(ev){
+        const input = document.getElementById('myInput')
+        const filter = input.value.toUpperCase()
+        const ul=document.getElementTagName('.faveList')
+        const li = ul.getElementByTagName('li')
+
+        for(let i=0;i<li.length;i++){
+            a=li[i].getElementByTagName('a')[0]
+            if(a.innerHTML.toUpperCase().indexOf(filter)>-1){
+                li[i].style.display ="";
+            }else{
+                li[i].style.dispaly='none'
+            }
+        }
+
+    }
+
+    searchOnEnter(ev){
+        if(ev.key === 'Enter'){
+            this.searchDino(ev)
+        }
     }
 
     delDino(ev){
@@ -117,22 +146,29 @@ class App {
     favDino(dino,ev){
         const fav = ev.target.closest('.dino')
         dino.fav = !dino.fav
-
+         const faveList = document.querySelector('.faveList')
+         console.log(dino.fav)
         if(dino.fav){
-            fav.classList.add('color')
+                fav.classList.add("color")
+                this.faves.push(dino)
+                const item = fav.cloneNode(true)
+                item.querySelector('span.button-group').remove()
+                faveList.insertBefore(item,faveList.firstChild)
         }else{
             fav.classList.remove('color')
+            const faveChild = faveList.children
+           for(let i=0;i<faveChild.length;i++){
+                if(faveChild[i].dataset.id === fav.dataset.id){
+                    faveChild[i].remove()
+                }
+
+            }
+            for(let i=0;i<this.faves.length;i++){
+                this.faves.splice(i,1)
+            }
         }
+        console.log(this.faves)
         this.save()
-        
-        // if(fav){
-        //     if(fav.classList.contains('color')){
-        //         fav.classList.remove('color')
-        //     }
-        //     else{
-        //         fav.classList.add('color')
-        //     }
-        // }
     }
     
     editDino(dino,ev){
@@ -168,7 +204,6 @@ class App {
         //if(key == 13){
             
         for(let i=0;i<this.dinos.length;i++){
-            console.log(dinoId, this.dinos[i].id)
             if(parseInt(dinoId) === this.dinos[i].id){
                 this.dinos[i].name = newName
                 this.save()
@@ -216,7 +251,6 @@ class App {
     }
 
     renderListItem(dino){
-        console.log(dino)
         const item = this.template.cloneNode(true)
         item.classList.remove('template')
         item.dataset.id = dino.id
@@ -228,6 +262,11 @@ class App {
 
         if(dino.fav){
             item.classList.add('color')
+        }
+
+        if(dino.dinoEats){
+            item.querySelector('.dinoEats')
+            .textContent = dino.eats
         }
         
         //item.textContent = dino.name
